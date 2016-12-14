@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<h4>Appointment Scheduler</h4>
+
+<div class="list-group">
+    <a href="#"
+       ng-repeat="timeSlot in model.timeSlots"
+       class="list-group-item list-group-item-action"
+       ng-class="{'list-group-item-danger': !!timeSlot.appointment}"
+       ng-click="timeSlotClicked(timeSlot)">
+        <span ng-bind="timeSlot.start | date:'h a'"></span> - <span ng-bind="timeSlot.end | date:'h a'"></span>
+    </a>
+</div>

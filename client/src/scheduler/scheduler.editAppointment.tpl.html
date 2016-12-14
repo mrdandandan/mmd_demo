@@ -1,10 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form name="editAppointmentForm">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Appointment Details</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text"
+                               class="form-control"
+                               id="name"
+                               ng-model="model.appointment.name"
+                               required />
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumber">Phone Number</label>
+                        <input type="tel"
+                               class="form-control"
+                               id="phoneNumber"
+                               ng-model="model.appointment.phoneNumber"
+                               required />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit"
+                            ng-if="!model.isNewAppointment"
+                            ng-click="cancel()"
+                            class="btn btn-danger">Cancel Appointment</button>
+                    <button type="submit"
+                            ng-click="save()"
+                            class="btn btn-primary"
+                            ng-class="{disabled: editAppointmentForm.$invalid}" >Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

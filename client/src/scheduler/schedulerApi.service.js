@@ -1,14 +1,14 @@
-(function() {
+(function () {
     angular.module('scheduler')
-        .service('SchedulerApi', SchedulerApiService);
+        .service('schedulerApi', schedulerApiService);
 
-    SchedulerApiService.$inject = ['$http', 'API_CONFIG'];
+    schedulerApiService.$inject = ['$http', 'API_CONFIG'];
 
-    function SchedulerApiService($http, API_CONFIG) {
+    function schedulerApiService($http, API_CONFIG) {
         ////
         // Fields
         ////
-        let BASE_URL = `${API_CONFIG.HOST}:${API_CONFIG.PORT}/api/appointment`;
+        let BASE_URL = `${API_CONFIG.HOST}:${API_CONFIG.PORT}/api/appointments`;
 
         ////
         // API
@@ -29,6 +29,8 @@
                     timeSlotId,
                     appointment: {name, phoneNumber}
                 }
+            }).then(response => {
+                return response.data;
             });
         }
 
@@ -39,6 +41,8 @@
                 data: {
                     timeSlotId
                 }
+            }).then(response => {
+                return response.data;
             });
         }
 
@@ -46,7 +50,13 @@
             return $http({
                 method: 'GET',
                 url: `${BASE_URL}/getTimeSlots`
-            });
+            })
+                .then(response => response.data.map(timeSlot => {
+                    timeSlot.start = new Date(timeSlot.start);
+                    timeSlot.end = new Date(timeSlot.end);
+
+                    return timeSlot;
+                }));
         }
 
         function updateAppointment(timeSlotId, {name, phoneNumber}) {
