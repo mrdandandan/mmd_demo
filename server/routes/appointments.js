@@ -27,14 +27,6 @@ router.post(`/${ENDPOINTS.CANCEL_APPOINTMENT}`, (req, res) => {
         .catch(err => error(err, res));
 });
 
-router.get(`/${ENDPOINTS.GET_APPOINTMENT}`, (req, res) => {
-    return appointments.getAppointment(req.query.timeSlotId)
-        .then(response => {
-            res.json(response);
-        })
-        .catch(err => error(err, res));
-});
-
 router.get(`/${ENDPOINTS.GET_TIME_SLOTS}`, (req, res) => {
     return appointments.getTimeSlots()
         .then(response => {
